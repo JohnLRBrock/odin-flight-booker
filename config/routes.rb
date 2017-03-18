@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'flight#index'
+  get  '/flights',     to: 'flight#index'
+  get  '/booking/new', to: 'booking#new'
 end

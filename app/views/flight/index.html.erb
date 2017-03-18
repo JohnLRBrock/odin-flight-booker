@@ -1,0 +1,26 @@
+<%= form_tag "/flights", method: "get" do %>
+  <%= collection_select(:airport, :start_airport_id, Airport.all, :id, :code) %>
+  <%= collection_select(:airport, :end_airport_id, Airport.all, :id, :code) %>
+  <%  passengers_array = [['1', 1], ['2', 2], ['3', 3], ['4', 4]] %>
+  <%= select_tag(:num_passengers, options_for_select(passengers_array)) %>
+   
+  <%= select_tag(:flight_date, options_for_select(@dates)) %>
+  <%= submit_tag("Search") %>
+<% end %>
+<br>
+<% if @valid_search %>
+  <h1>Found Flights:</h1>
+  <% if @found_flights && @found_flights.any? %>
+    <%= form_tag('/booking/new', method: 'get') do %>
+      <% @found_flights.each do |flight| %>
+        <%= radio_button_tag 'flight', flight.id %>
+        <%= render 'flight', flight: flight %>
+      <% end %>
+      <% hidden_field_tag('num_passengers', params[:num_passengers]) %>
+      <%= submit_tag('Submit') %>
+      <% end %>
+  <% else %>
+    <h3>No flights found</h3>
+  <% end %> 
+<% end %>
+
