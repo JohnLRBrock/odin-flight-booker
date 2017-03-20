@@ -11,7 +11,7 @@
 <% if @valid_search %>
   <h1>Found Flights:</h1>
   <% if @found_flights && @found_flights.any? %>
-    <%= form_tag(bookings_url, method: 'get') do %>
+    <%= form_tag(new_booking_url, method: 'get') do %>
       <% @found_flights.each do |flight| %>
         <%= radio_button_tag 'flight', flight.id %>
         <%= render 'flight', flight: flight %>
