@@ -1,0 +1,14 @@
+<%= form_for @booking do |f| %>
+  <%= f.fields_for :passengers do |passenger| %>
+    
+    <%= passenger.label :name %>
+    <%= passenger.text_field :name %>
+    
+    <%= passenger.label :email %>
+    <%= passenger.text_field :email %>
+    <br>
+  <% end %>
+  <%= hidden_field_tag 'num_passengers', params[:num_passengers] %>
+  <%= hidden_field_tag 'flight', params[:flight] %>
+  <%= f.submit 'Submit' %>
+<% end %>
