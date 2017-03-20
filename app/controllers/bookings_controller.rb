@@ -1,4 +1,4 @@
-class BookingController < ApplicationController
+class BookingsController < ApplicationController
   def new
     @booking = Booking.new
     params[:num_passengers].to_i.times do
@@ -13,7 +13,15 @@ class BookingController < ApplicationController
       passenger = Passenger.create(name: name, email: email, booking_id: @booking.id)
       @booking.passengers << passenger
     end
-    redirect_to bookings_url(@booking.id)
+    redirect_to booking_url(@booking)
+  end
+  def show
+    if Booking.exists? params[:id]
+      @booking = Booking.find params[:id]
+      @flight = @booking.flight
+    else
+      redirect_to root_url
+    end
   end
 
   private

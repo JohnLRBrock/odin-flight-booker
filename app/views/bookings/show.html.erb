@@ -1,0 +1,10 @@
+<% unless @booking.passengers.empty? %>
+  <% @booking.passengers.each do |passenger| %>
+    <%= render 'passenger', passenger: passenger %>
+  <% end %>
+<% end %>
+<p>Starting Airport Code: <%= @flight.start_airport.code %></p>
+<p>Ending Airport Code: <%= @flight.end_airport.code %></p>
+<p>Flight Date: <%= @flight.date %></p>
+<p>Start Time: <%= @flight.start_time %></p>
+<p>Flight Duration: <%= @flight.duration_in_seconds.to_i/3600 %> hours</p>
