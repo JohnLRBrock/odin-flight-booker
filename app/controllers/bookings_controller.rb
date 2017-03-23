@@ -12,6 +12,7 @@ class BookingsController < ApplicationController
       email = params[:booking][:passengers_attributes][n.to_s][:email]
       passenger = Passenger.create(name: name, email: email, booking_id: @booking.id)
       @booking.passengers << passenger
+      PassengerMailer.thank_you_email(passenger, Flight.find(params[:flight].to_i)).deliver_now
     end
     redirect_to booking_url(@booking)
   end
