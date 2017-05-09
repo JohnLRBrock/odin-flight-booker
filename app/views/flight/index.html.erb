@@ -9,12 +9,14 @@
 <% end %>
 <br>
 <% if @valid_search %>
-  <h1>Found Flights:</h1>
+  <h2>Found Flights:</h2>
   <% if @found_flights && @found_flights.any? %>
     <%= form_tag(new_booking_url, method: 'get') do %>
       <% @found_flights.each do |flight| %>
-        <%= radio_button_tag 'flight', flight.id %>
-        <%= render 'flight', flight: flight %>
+        <section class="flight_selection">
+          <%= radio_button_tag 'flight', flight.id, class: :radio_button %>
+          <%= render 'flight', flight: flight %>
+        </section>
       <% end %>
       <%= hidden_field_tag('num_passengers', params[:num_passengers]) %>
       <%= submit_tag('Submit') %>
